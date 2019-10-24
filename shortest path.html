@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Path</title>
+</head>
+<body>
+    <h2>Result:</h2>
+    <p id="result"></p>
+        
+        <script>
+        function perfectCity(start, end) {
+    var result = 0;
+    for (var i = 0; i < 2; i++) {
+      if (Math.floor(start[i]) === Math.floor(end[i])) {
+        var floorSum = start[i] - Math.floor(start[i]);
+        floorSum += end[i] - Math.floor(end[i]);
+        if (floorSum < 1) {
+          result += floorSum;
+          start[i] = Math.floor(start[i]);
+         end[i] = Math.floor(end[i]);
+        }
+        else {
+          result += 2 - floorSum;
+          start[i] = Math.ceil(start[i]);
+          end[i] = Math.ceil(end[i]);
+        }
+      }
+      else {
+        if (start[i] > end[i]) {
+          var tmp = end;
+          end = start;
+          start = tmp;
+        }
+        result += start[i] - Math.ceil(start[i]);
+        start[i] = Math.ceil(start[i]);
+        result += end[i] - Math.floor(end[i]);
+        end[i] = Math.floor(end[i]);
+      }
+      result += end[i] - start[i];
+    }
+  
+    return result;
+  }
+  var start = [0.4, 1],
+      end = [0.9, 3];
+      document.getElementById("result").innerHTML = perfectCity(start,end);
+        </script>
+
+
+</body>
+</html>
